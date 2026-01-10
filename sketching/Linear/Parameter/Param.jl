@@ -1,0 +1,29 @@
+module Parameter
+    # Parameters of sketched Newton method
+    struct StoNewton
+        # stopping parameters
+        MaxIter::Int                       # Maximum iteration
+        # fixed parameters
+        Rep::Int                           # Number of independent runs
+        tau::Array{Int64}                  # Number of iterations for inexact solver
+        c_1::Float64                       # beta_t = c_1/t^{c_2}
+        c_2::Float64
+        c_3::Float64                       # chi_t = beta_t^{c_3}
+        SigToe::Array{Float64}             # Toeplitz covariance parameter
+        SigEqui::Array{Float64}            # Equi-Corr covariance parameter
+        # data parameters
+        D::Array{Int64}                    # Problem dimension
+		sigma::Float64					   # Noise level
+    end
+end
+
+StoNewtonSet = Parameter.StoNewton(3e5,              # Max_Iter
+	                  10,                           # Rep
+	                  [5,10,20,30],                  # tau
+					  1,                             # c_1
+	                  0.505,                         # c_2
+					  2,                             # c_3
+					  [0,0.5],               # RToe
+					  [0.2],                 # REqu
+					  [10,20,40,60],                # d
+					  1)                            # sigma
