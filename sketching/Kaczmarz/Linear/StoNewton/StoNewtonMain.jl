@@ -8,6 +8,7 @@ struct StoNewtonResult
 	IdCov_SC::Int64					# 1 or 0, true parameter covered by confidence interval or not (weighted sample cov)
 	COV_value_SC::Float64			# variance estimator of parameter mean (weighted sample cov)
 	Err_SC::Float64
+	width_SC::Float64
 end
 
 
@@ -29,7 +30,7 @@ function StoNewtonMain(StoNewtonSet)
 	for IdDim=1:LenDim, IdTau=1:LenTau
 		nx = D[IdDim]
 		X_true = (1/nx)*ones(nx) # true parameter
-		q_vec = [1, floor(Int, nx^(1/4)), floor(Int, nx^(1/2))]
+		q_vec = [1, ceil(Int, nx^(1/4)), ceil(Int, nx^(1/2))]
 
 		# Toeplitz Covariance
 		for IdSigToe = 1:LenSigToe
@@ -41,7 +42,7 @@ function StoNewtonMain(StoNewtonSet)
 				for IdRep = 1:Rep
 				    println("D-",IdDim,"-Tau-",IdTau,"-CovT-",IdSigToe,"-q-",q,"-Rep-",IdRep)
 
-				    Time,trueCov,IdCov_SC,COV_value_SC,Err_SC =
+				    Time,trueCov,IdCov_SC,COV_value_SC,Err_SC,width_SC =
 				    StoNewton(c_1,c_2,c_3,Max_Iter,tau[IdTau],nx,X_true,Sigma,Xistar,sigma,q)
 				    println("Time,", Time)
 
@@ -51,7 +52,7 @@ function StoNewtonMain(StoNewtonSet)
 					    mkpath(path1)
 					end
 					path = string(path1,"/rep",IdRep,".jld2")
-					Result = StoNewtonResult(Time,trueCov,Int.(IdCov_SC),COV_value_SC,Err_SC)
+					Result = StoNewtonResult(Time,trueCov,Int.(IdCov_SC),COV_value_SC,Err_SC,width_SC)
 					@save path Result
 				end
 			end
@@ -67,7 +68,7 @@ function StoNewtonMain(StoNewtonSet)
 				for IdRep = 1:Rep
 				    println("D-",IdDim,"-Tau-",IdTau,"-CovE-",IdSigEqui,"-q-",q,"-Rep-",IdRep)
 
-				    Time,trueCov,IdCov_SC,COV_value_SC,Err_SC =
+				    Time,trueCov,IdCov_SC,COV_value_SC,Err_SC,width_SC =
 				    StoNewton(c_1,c_2,c_3,Max_Iter,tau[IdTau],nx,X_true,Sigma,Xistar,sigma,q)
 				    println("Time,", Time)
 
@@ -77,7 +78,7 @@ function StoNewtonMain(StoNewtonSet)
 					    mkpath(path1)
 				    end
 					path = string(path1,"/rep",IdRep,".jld2")
-					Result = StoNewtonResult(Time,trueCov,Int.(IdCov_SC),COV_value_SC,Err_SC)
+					Result = StoNewtonResult(Time,trueCov,Int.(IdCov_SC),COV_value_SC,Err_SC,width_SC)
 					@save path Result
 				end
 			end

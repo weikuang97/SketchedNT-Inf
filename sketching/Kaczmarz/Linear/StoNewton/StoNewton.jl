@@ -85,6 +85,7 @@ function StoNewton(c1,c2,c3,Max_Iter,ttau,nx,X_true,Sigma,Xistar,sigma,q)
         COV_value_SC = 0
     end
     radius_SC = 1.96*sqrt(alpha_t)*sqrt(COV_value_SC)
+    width_SC = 2*radius_SC
 
 
     Xmean = mean(X_t)
@@ -92,5 +93,5 @@ function StoNewton(c1,c2,c3,Max_Iter,ttau,nx,X_true,Sigma,Xistar,sigma,q)
     IdCov_SC = (mean(X_true)>=(Xmean-radius_SC)) && (mean(X_true)<=(Xmean+radius_SC))
 
     # return Time,Xistar,IdCov_PI,COV_value_PI,IdCov_SC,COV_value_SC
-    return Time,Xistar,IdCov_SC,COV_value_SC,Err_SC
+    return Time,Xistar,IdCov_SC,COV_value_SC,Err_SC,width_SC
 end

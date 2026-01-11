@@ -21,14 +21,14 @@ Err_SC = zeros(Rep) # error in variance estimation of parameter mean (weighted s
 # RateCov_PI = zeros(Rep) # coverage rate of confidence interval (plug-in)
 RateCov_SC = zeros(Rep) # coverage rate of confidence interval (weighted sample cov)
 VarErr_SC = zeros(Rep)
-
+width_SC = zeros(Rep)
 
 
 # go over all cases
 for IdDim=1:LenDim, IdTau=1:LenTau
     path1 = string(workdir,"/Solution/Dim",IdDim,"Tau",IdTau)
     nx = D[IdDim]
-    q_vec = [1, floor(Int, nx^(1/4)), floor(Int, nx^(1/4))]
+    q_vec = [1, ceil(Int, nx^(1/4)), ceil(Int, nx^(1/2))]
 
     # Toeplitz Covariance
     for IdSigToe = 1:LenSigToe
@@ -52,6 +52,7 @@ for IdDim=1:LenDim, IdTau=1:LenTau
                 # RateCov_PI[IdRep] = Result.IdCov_PI
                 RateCov_SC[IdRep] = Result.IdCov_SC
                 Err_SC[IdRep] = Result.Err_SC
+                width_SC[IdRep] = Result.width_SC
             end
 
             # summarize results
@@ -72,6 +73,7 @@ for IdDim=1:LenDim, IdTau=1:LenTau
             write(io, string("Dim-",D[IdDim],"-Tau-",tau[IdTau],"-Toe-",SigToe[IdSigToe],"-q-",q,"\n"))
             # write(io, string("CovRate_PI:", mean(RateCov_PI),'\n'))
             write(io, string("CovRate_SC:", mean(RateCov_SC),'\n'))
+            write(io, string("width_SC:", mean(width_SC),'\n'))
             close(io)
         end
     end
@@ -99,6 +101,7 @@ for IdDim=1:LenDim, IdTau=1:LenTau
                 # RateCov_PI[IdRep] = Result.IdCov_PI
                 RateCov_SC[IdRep] = Result.IdCov_SC
                 Err_SC[IdRep] = Result.Err_SC
+                width_SC[IdRep] = Result.width_SC
             end
 
             # summarize results
@@ -119,6 +122,7 @@ for IdDim=1:LenDim, IdTau=1:LenTau
             write(io, string("Dim-",D[IdDim],"-Tau-",tau[IdTau],"-Equ-",SigEqui[IdSigEqui],"-q-",q,"\n"))
             # write(io, string("CovRate_PI:", mean(RateCov_PI),'\n'))
             write(io, string("CovRate_SC:", mean(RateCov_SC),'\n'))
+            write(io, string("width_SC:", mean(width_SC),'\n'))
             close(io)
         end
     end
