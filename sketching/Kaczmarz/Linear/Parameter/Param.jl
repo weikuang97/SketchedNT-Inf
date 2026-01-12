@@ -18,12 +18,12 @@ module Parameter
 end
 
 StoNewtonSet = Parameter.StoNewton(3e5,              # Max_Iter
-	                  10,                           # Rep
-	                  [2],                  # tau
+	                  200,                           # Rep
+	                  [5,10,15,20],                  # tau
 					  1,                             # c_1
 	                  0.505,                         # c_2
 					  2,                             # c_3
 					  [0,0.5],               # RToe
 					  [0.2],                 # REqu
-					  [5],                # d
+					  [10,20,30,40],                # d
 					  1)                            # sigma

@@ -3,7 +3,7 @@ using Random
 using Distributions
 using JLD2
 
-# cd("/.../sketching/Kaczmarz/Linear/StoNewton")
+cd("/.../sketching/Kaczmarz/Linear/StoNewton")
 
 
 
