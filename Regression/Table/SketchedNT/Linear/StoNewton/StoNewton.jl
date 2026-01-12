@@ -22,7 +22,7 @@ function StoNewton(c1,c2,c3,Max_Iter,ttau,nx,X_true,Sigma,Xistar,sigma)
         phi_t = beta_t+chi_t/2
 
         # Step 1: generate random gradient and Hessian
-        a_t, eps_t = rand(MvNormal(zeros(nx),Sigma)), sigma*rand(Normal(0,sigma))
+        a_t, eps_t = rand(MvNormal(zeros(nx),Sigma)), sigma*rand(Normal(0,1))
         barg_t = a_t*(a_t'*(X_t-X_true)) - eps_t*a_t
         bar_nab_x2f_t = a_t*a_t'
         cum_bar2x_f_t = t/(t+1)*cum_bar2x_f_t + 1/(t+1)*bar_nab_x2f_t

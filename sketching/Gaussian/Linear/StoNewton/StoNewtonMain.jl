@@ -3,12 +3,10 @@ include("StoNewton.jl")
 struct StoNewtonResult
 	Time::Float64					# running time
 	trueCov::Matrix{Float64}		# true limiting covariance matrix
-	# IdCov_PI::Int64					# 1 or 0, true parameter covered by confidence interval or not (plug-in)
-	# COV_value_PI::Float64			# variance estimator of parameter mean (plug-in)
 	IdCov_SC::Int64					# 1 or 0, true parameter covered by confidence interval or not (weighted sample cov)
 	COV_value_SC::Float64			# variance estimator of parameter mean (weighted sample cov)
-	Err_SC::Float64
-	width_SC::Float64
+	Err_SC::Float64                 # covariance estimation relative error
+	width_SC::Float64				# width of confidence interval
 end
 
 

@@ -1,7 +1,7 @@
 using JLD2
 using Statistics
 
-# workdir = "/.../Regression/Table/SketchedNT/Linear"
+# workdir = "/.../sketching/Kaczmarz/Linear"
 
 
 include(string(workdir, "/Parameter/Param.jl"))
