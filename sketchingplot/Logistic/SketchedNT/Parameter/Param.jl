@@ -5,29 +5,31 @@ module Parameter
         MaxIter::Int                       # Maximum iteration
         # fixed parameters
         Rep::Int                           # Number of independent runs
-        tau::Int64                         # Number of iterations for inexact solver
+        tau::Vector{Int64}                         # Number of iterations for inexact solver
         c_1::Float64                       # beta_t = c_1/t^{c_2}
         c_2::Float64
         c_3::Float64                       # chi_t = beta_t^{c_3}
         Sigma::Matrix{Float64}             # Sampling covariance matrix
         # data parameters
         D::Int64                           # Problem dimension
-		sigma::Float64                     # Noise level
+		mu::Float64                        # Regularization parameter
     end
 end
 
-# Equi-corr matrix
-D = 20
-RR = 0.2
-Sigma = RR*ones(D,D)+(1-RR)*Matrix(1.0I,D,D)
+# Toeplitz matrix
+D = 5
+RR = 0.5
+Sigma = [RR^(abs(i-j)) for i=1:D, j=1:D]
+
+
 
 
 StoNewtonSet = Parameter.StoNewton(3e5,              # Max_Iter
-	                  5,                           # Rep
-	                  0,                             # tau
+	                  200,                           # Rep
+	                  [2],                             # tau
 					  1,                             # c_1
 	                  0.505,                         # c_2
 					  2,                             # c_3
 					  Sigma,                         # Sigma
 					  D,                             # d
-					  1)                             # sigma
+					  0.1)                           # mu

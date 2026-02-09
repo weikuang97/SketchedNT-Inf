@@ -1,7 +1,7 @@
 using JLD2
 using Statistics
 
-workdir = "/.../sketching/Kaczmarz/Linear"
+workdir = "/.../sketching/Gaussian/Linear"
 
 
 include(string(workdir, "/Parameter/Param.jl"))
@@ -28,7 +28,7 @@ width_SC = zeros(Rep)
 for IdDim=1:LenDim, IdTau=1:LenTau
     path1 = string(workdir,"/Solution/Dim",IdDim,"Tau",IdTau)
     nx = D[IdDim]
-    q_vec = [1, ceil(Int, nx^(1/4)), ceil(Int, nx^(1/2))]
+    q_vec = [1]
 
     # Toeplitz Covariance
     for IdSigToe = 1:LenSigToe

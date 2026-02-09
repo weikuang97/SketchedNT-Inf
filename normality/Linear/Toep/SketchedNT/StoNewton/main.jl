@@ -5,7 +5,7 @@ using DataFrames
 using CSV
 
 
-# cd("/.../Regression/Plot/Linear/SketchedNT/StoNewton")
+# cd("/.../normality/Linear/Toep/SketchedNT/StoNewton")
 
 
 

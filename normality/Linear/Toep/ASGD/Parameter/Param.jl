@@ -16,13 +16,16 @@ end
 
 # Equi-corr matrix
 D = 5
-RR = 0.3
-Sigma = RR*ones(D,D)+(1-RR)*Matrix(1.0I,D,D)
+# RR = 0.5
+# Sigma = RR*ones(D,D)+(1-RR)*Matrix(1.0I,D,D)
+
+# Sigma = Matrix(1.0I,D,D)
+Sigma = [RR^abs(i-j) for i=1:D, j=1:D]
 
 
 ASGDSet = Parameter.ASGD(3e5,                        # Max_Iter
-	                  5,                           # Rep
-					  0.5,                           # c_1
+	                  200,                           # Rep
+					  1,                           # c_1
 	                  0.505,                         # c_2
 					  Sigma,                         # Sigma
 					  D,                             # d

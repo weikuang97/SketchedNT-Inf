@@ -1,9 +1,10 @@
 using LinearAlgebra
 using Random
 using Distributions
-using JLD2
+using DataFrames
+using CSV
 
-# cd("/.../sketching/Kaczmarz/Linear/StoNewton")
+cd("/.../Regression/Plot/Logistic/SketchedNT/StoNewton")
 
 
 

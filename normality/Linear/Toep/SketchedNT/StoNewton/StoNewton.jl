@@ -4,9 +4,6 @@ function StoNewton(c1,c2,c3,Max_Iter,ttau,nx,X_true,Sigma,Xistar,sigma)
     cum_bar2x_f_t,B_t = Matrix(1.0I,nx,nx),zeros(nx,nx)
     alpha_t = 0 # stepsize
 
-
-    diff_vec = [] # normality
-
     ## Start the loop
     Time = time()
     while t <= Max_Iter
@@ -41,12 +38,12 @@ function StoNewton(c1,c2,c3,Max_Iter,ttau,nx,X_true,Sigma,Xistar,sigma)
         alpha_t = rand(Uniform(beta_t,beta_t+chi_t))
         X_t = X_t + alpha_t*NewDir_t
 
-        if mod(t, 50000) == 0
-            diff_vec = push!(diff_vec, sqrt(1/alpha_t) * sum(X_t-X_true) / sqrt(sum(Xistar)))
-        end
-
         t = t + 1
     end
+
+    diff_std = sqrt(1/alpha_t) * sum(X_t-X_true) / sqrt(sum(Xistar))
+    diff = sqrt(1/alpha_t) * sum(X_t-X_true)
+
     Time = time() - Time
-    return Time,diff_vec
+    return Time,diff_std,diff
 end

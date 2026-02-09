@@ -6,19 +6,19 @@ using LaTeXStrings
 using LinearAlgebra
 
 
-# workdir = "/Users/weikuang/Desktop/UChicago/StoOpt/IMA/github/NewtonInf/Regression/Plot/Linear/ASGD"
+workdir = "/.../normality/Linear/Toep/SGD"
 
 include(string(workdir, "/Parameter/Param.jl"))
-include(string(workdir, "/ASGD/ASGDMain.jl"))
+include(string(workdir, "/SGD/SGDMain.jl"))
 
 # load parameters
-Max_Iter,Rep = ASGDSet.MaxIter,ASGDSet.Rep
-c_1,c_2 = ASGDSet.c_1,ASGDSet.c_2
-Sigma = ASGDSet.Sigma
-D = ASGDSet.D
+Max_Iter,Rep = SGDSet.MaxIter,SGDSet.Rep
+c_1,c_2 = SGDSet.c_1,SGDSet.c_2
+Sigma = SGDSet.Sigma
+D = SGDSet.D
 
 # initialize
-diff_mat = zeros(div(Max_Iter, 50000), Rep)
+diff_vec = zeros(Rep)
 
 path1 = string(workdir,"/Solution")
 # go over all repetitions
@@ -27,7 +27,7 @@ for IdRep = 1:Rep
     println("IDRep:",IdRep)
     path = string(path1,"/rep",IdRep,"/Diff.csv")
     df_diff = CSV.File(path; header=true) |> DataFrame
-    diff_mat[:,IdRep] = df_diff.diff_vec
+    diff_vec[IdRep] = df_diff.diff[1]
 
     Time = time()-Time
     println("Time:",Time)
@@ -41,5 +41,5 @@ if !isdir(path2)
 end
 
 pathcov = string(path2,"/Diff_mat.csv")
-Df_diff = DataFrame(diff_t1 = diff_mat[1,:], diff_t2 = diff_mat[2,:], diff_t3 = diff_mat[3,:], diff_t4 = diff_mat[4,:], diff_t5 = diff_mat[5,:], diff_t6 = diff_mat[6,:])
+Df_diff = DataFrame(diff_vec = diff_vec)
 CSV.write(pathcov, Df_diff)

@@ -1,21 +1,22 @@
 using LinearAlgebra
 using Random
 using Distributions
-using JLD2
+using DataFrames
+using CSV
 
-# cd("/.../sketching/Kaczmarz/Linear/StoNewton")
+# cd("/.../normality/Linear/Toep/SGD/SGD")
 
 
 
 #using Main.Parameter
 include("../Parameter/Param.jl")
 
-include("StoNewtonMain.jl")
+include("SGDMain.jl")
 #######################################
 #########  run main file    ###########
 #######################################
 function main()
-    StoNewtonMain(StoNewtonSet)
+    SGDMain(SGDSet)
 end
 
 main()

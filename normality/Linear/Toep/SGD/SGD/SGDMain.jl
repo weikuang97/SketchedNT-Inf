@@ -1,9 +1,9 @@
-include("ASGD.jl")
+include("SGD.jl")
 
 
 ## Implement SGD framework for whole problem set
 # ASGDSet: parameters of ASGD inference
-function ASGDMain(ASGDSet)
+function SGDMain(ASGDSet)
 	# load parameters
 	Max_Iter,Rep = ASGDSet.MaxIter,ASGDSet.Rep
 	c_1,c_2 = ASGDSet.c_1,ASGDSet.c_2
@@ -19,7 +19,7 @@ function ASGDMain(ASGDSet)
 	# go over all repetitions
 	for IdRep = 1:Rep
 		println("Rep:", IdRep)
-		Time,diff_vec = ASGD(c_1,c_2,Max_Iter,nx,X_true,Sigma,Xistar,sigma)
+		Time,diff = SGD(c_1,c_2,Max_Iter,nx,X_true,Sigma,Xistar,sigma)
         println("Time:", Time)
 
 		path1 = string("../Solution/rep",IdRep)
@@ -27,7 +27,7 @@ function ASGDMain(ASGDSet)
 			mkpath(path1)
 		end
 		pathcov = string(path1,"/Diff.csv")
-		df_diff = DataFrame(diff_vec = diff_vec)
+		df_diff = DataFrame(diff = diff)
 		CSV.write(pathcov, df_diff)
 	end
 end

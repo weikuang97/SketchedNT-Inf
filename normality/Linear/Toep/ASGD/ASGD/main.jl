@@ -4,7 +4,7 @@ using Distributions
 using DataFrames
 using CSV
 
-# cd("/Users/weikuang/Desktop/UChicago/StoOpt/IMA/github/NewtonInf/Regression/Plot/Linear/ASGD/ASGD")
+# cd("/.../normality/Linear/Toep/ASGD/ASGD")
 
 
 

@@ -16,15 +16,15 @@ function StoNewtonMain(StoNewtonSet)
 
 	# true limiting cov
 	if c_2 == 1
-		Xistar = inv(Sigma)
+		Xistar = (sigma^2) * inv(Sigma)
 	else
-		Xistar = 0.5 * inv(Sigma)
+		Xistar = 0.5 * (sigma^2) * inv(Sigma)
 	end
 
     # go over all repetitions
 	for IdRep = 1:Rep
 		println("Rep:", IdRep)
-		Time,diff_vec = StoNewton(c_1,c_2,c_3,Max_Iter,tau,nx,X_true,Sigma,Xistar,sigma)
+		Time,diff_std,diff = StoNewton(c_1,c_2,c_3,Max_Iter,tau,nx,X_true,Sigma,Xistar,sigma)
         println("Time:", Time)
 
 		path1 = string("../Solution/tau",tau,"/rep",IdRep)
@@ -32,7 +32,7 @@ function StoNewtonMain(StoNewtonSet)
 			mkpath(path1)
 		end
 		pathcov = string(path1,"/Diff.csv")
-		df_diff = DataFrame(diff_vec = diff_vec)
+		df_diff = DataFrame(diff_std = diff_std, diff = diff)
 		CSV.write(pathcov, df_diff)
 	end
 end
