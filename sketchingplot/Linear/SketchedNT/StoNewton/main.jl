@@ -5,7 +5,7 @@ using DataFrames
 using CSV
 
 
-# cd("/.../sketchingplot/Logistic/SketchedNT/StoNewton")
+# cd("/.../sketchingplot/Linear/SketchedNT/StoNewton")
 
 
 

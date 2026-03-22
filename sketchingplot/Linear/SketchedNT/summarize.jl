@@ -5,7 +5,7 @@ using Plots
 using LaTeXStrings
 
 
-# workdir = "/.../Regression/Plot/Logistic/SketchedNT"
+# workdir = "/.../sketchingplot/Linear/SketchedNT"
 include(string(workdir, "/Parameter/Param.jl"))
 include(string(workdir, "/StoNewton/StoNewtonMain.jl"))
 

@@ -16,9 +16,7 @@ LenTau=length(tau); LenDim=length(D);
 LenSigToe=length(SigToe);LenSigEqui = length(SigEqui)
 
 # initialize
-# Err_PI = zeros(Rep) # error in variance estimation of parameter mean (plug-in)
 Err_SC = zeros(Rep) # error in variance estimation of parameter mean (weighted sample cov)
-# RateCov_PI = zeros(Rep) # coverage rate of confidence interval (plug-in)
 RateCov_SC = zeros(Rep) # coverage rate of confidence interval (weighted sample cov)
 VarErr_SC = zeros(Rep)
 width_SC = zeros(Rep)
@@ -28,7 +26,7 @@ width_SC = zeros(Rep)
 for IdDim=1:LenDim, IdTau=1:LenTau
     path1 = string(workdir,"/Solution/Dim",IdDim,"Tau",IdTau)
     nx = D[IdDim]
-    q_vec = [1]
+    q_vec = [1,5,10,20]
 
     # Toeplitz Covariance
     for IdSigToe = 1:LenSigToe
@@ -47,9 +45,7 @@ for IdDim=1:LenDim, IdTau=1:LenTau
 
                 @load path Result
                 COV_value_orc = mean(Result.trueCov)
-                # Err_PI[IdRep] = (Result.COV_value_PI - COV_value_orc)/COV_value_orc
                 VarErr_SC[IdRep] = (Result.COV_value_SC - COV_value_orc)/COV_value_orc
-                # RateCov_PI[IdRep] = Result.IdCov_PI
                 RateCov_SC[IdRep] = Result.IdCov_SC
                 Err_SC[IdRep] = Result.Err_SC
                 width_SC[IdRep] = Result.width_SC
@@ -63,7 +59,6 @@ for IdDim=1:LenDim, IdTau=1:LenTau
 
             io = open(string(path2, "/Error.txt"), "a");
             write(io, string("Dim-",D[IdDim],"-Tau-",tau[IdTau],"-Toe-",SigToe[IdSigToe],"-q-",q,"\n"))
-            # write(io, string("Err_PI:", mean(Err_PI),'\n'))
             write(io, string("Err_SC:", mean(Err_SC),'\n'))
             write(io, string("VarErr_SC:", mean(VarErr_SC),'\n'))
             close(io)
@@ -71,7 +66,6 @@ for IdDim=1:LenDim, IdTau=1:LenTau
 
             io = open(string(path2, "/Rate.txt"), "a");
             write(io, string("Dim-",D[IdDim],"-Tau-",tau[IdTau],"-Toe-",SigToe[IdSigToe],"-q-",q,"\n"))
-            # write(io, string("CovRate_PI:", mean(RateCov_PI),'\n'))
             write(io, string("CovRate_SC:", mean(RateCov_SC),'\n'))
             write(io, string("width_SC:", mean(width_SC),'\n'))
             close(io)
@@ -96,9 +90,7 @@ for IdDim=1:LenDim, IdTau=1:LenTau
 
                 @load path Result
                 COV_value_orc = mean(Result.trueCov)
-                # Err_PI[IdRep] = (Result.COV_value_PI - COV_value_orc)/COV_value_orc
                 VarErr_SC[IdRep] = (Result.COV_value_SC - COV_value_orc)/COV_value_orc
-                # RateCov_PI[IdRep] = Result.IdCov_PI
                 RateCov_SC[IdRep] = Result.IdCov_SC
                 Err_SC[IdRep] = Result.Err_SC
                 width_SC[IdRep] = Result.width_SC
@@ -112,7 +104,6 @@ for IdDim=1:LenDim, IdTau=1:LenTau
 
             io = open(string(path2, "/Error.txt"), "a");
             write(io, string("Dim-",D[IdDim],"-Tau-",tau[IdTau],"-Equ-",SigEqui[IdSigEqui],"-q-",q,"\n"))
-            # write(io, string("Err_PI:", mean(Err_PI),'\n'))
             write(io, string("Err_SC:", mean(Err_SC),'\n'))
             write(io, string("VarErr_SC:", mean(VarErr_SC),'\n'))
             close(io)
@@ -120,7 +111,6 @@ for IdDim=1:LenDim, IdTau=1:LenTau
 
             io = open(string(path2, "/Rate.txt"), "a");
             write(io, string("Dim-",D[IdDim],"-Tau-",tau[IdTau],"-Equ-",SigEqui[IdSigEqui],"-q-",q,"\n"))
-            # write(io, string("CovRate_PI:", mean(RateCov_PI),'\n'))
             write(io, string("CovRate_SC:", mean(RateCov_SC),'\n'))
             write(io, string("width_SC:", mean(width_SC),'\n'))
             close(io)

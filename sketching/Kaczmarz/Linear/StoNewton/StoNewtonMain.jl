@@ -28,7 +28,7 @@ function StoNewtonMain(StoNewtonSet)
 	for IdDim=1:LenDim, IdTau=1:LenTau
 		nx = D[IdDim]
 		X_true = (1/nx)*ones(nx) # true parameter
-		q_vec = [1]
+		q_vec = [1,5,10,20]
 
 		# Toeplitz Covariance
 		for IdSigToe = 1:LenSigToe

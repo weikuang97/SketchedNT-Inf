@@ -1,10 +1,11 @@
 library(ggplot2)
 library(ggmagnify)
 
-setwd("/.../sketchingplot/Logistic")
+setwd("/.../sketchingplot/Linear")
 
 
 Buff = as.integer(1e5)
+
 
 
 df_Cov_Equi_tau1_NT = read.csv("SketchedNT/Solution/Figures/q1/tau1/Cov_ave.csv")
@@ -55,3 +56,4 @@ Err_p1 = ggplot(df_Err_SC_Equi_tau, aes(x = log(Buff + seq_along(tau1)))) +
 
 
 ggsave("Err_p1.pdf", plot = Err_p1, width = 9, height = 6, dpi = 200)
+
