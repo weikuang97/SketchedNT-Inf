@@ -3,7 +3,7 @@ library(ggmagnify)
 library(latex2exp)
 
 
-setwd("/Users/weikuang/Desktop/UChicago/StoOpt/IMA/revision data/normality/Toep")
+setwd("/.../normality/Linear/Toep")
 
 df_diff_asgd = read.csv("ASGD/Solution/Figures/Diff_mat.csv")
 df_diff_sgd1 = read.csv("SGD1/Solution/Figures/Diff_mat.csv")
@@ -29,7 +29,7 @@ ggplot(df_all, aes(x = SketchedNT2, y = SGD2)) +
   geom_point(size = 1, color = "black") +
   geom_abline(intercept = 0, slope = 1, color = "red", linewidth = 0.8) +
 #  geom_abline(intercept = 0, slope = 1/sqrt(2), color = "green", linewidth = 0.8) +
-  coord_fixed(1, xlim = c(-5, 5), ylim = c(-5, 5)) +                 # 1:1 比例
+  coord_fixed(1, xlim = c(-5, 5), ylim = c(-5, 5)) +                 # 1:1
   theme_bw() +
   labs(
     title = "",
@@ -38,33 +38,3 @@ ggplot(df_all, aes(x = SketchedNT2, y = SGD2)) +
   )
 
 
-ggplot(df_all, aes(x = SketchedNT2_std, y = std_normal)) +
-  geom_point(size = 1, color = "black") +
-  geom_abline(intercept = 0, slope = 1, color = "red", linewidth = 0.8) +
-  #  geom_abline(intercept = 0, slope = 1/sqrt(2), color = "green", linewidth = 0.8) +
-  coord_fixed(1, xlim = c(-5, 5), ylim = c(-5, 5)) +                 # 1:1 比例
-  theme_bw() +
-  labs(
-    title = "",
-    x = TeX("Newton"),
-    y = TeX("N(0,1)")
-  )
-
-
-
-
-
-
-ggplot(df_diff, aes(sample = diff_t1)) +
-  stat_qq(color = "black", size = 1) +
-  stat_qq_line(color = "red", linewidth = 0.8) +
-  theme_bw() + 
-  labs(
-    title = "Normal Q-Q Plot",
-    x = "Theoretical Quantiles",
-    y = "Sample Quantiles"
-  )
-)
-
-
-       asp = 1)
