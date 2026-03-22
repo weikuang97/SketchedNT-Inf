@@ -11,18 +11,13 @@ df_diff_sgd2 = read.csv("SGD2/Solution/Figures/Diff_mat.csv")
 df_diff_nt1 = read.csv("SketchedNT1/Solution/Figures/tau0/Diff_mat.csv")
 df_diff_nt2 = read.csv("SketchedNT2/Solution/Figures/tau0/Diff_mat.csv")
 
-std_normal = rnorm(200)
 
 df_all = data.frame(
   ASGD        = sort(df_diff_asgd$diff_vec),
   SGD1        = sort(df_diff_sgd1$diff_vec),
   SGD2        = sort(df_diff_sgd2$diff_vec),
   SketchedNT1 = sort(df_diff_nt1$diff_vec),
-  SketchedNT2 = sort(df_diff_nt2$diff_vec),
-  ASGD_std    = sort(df_diff_asgd$diff_std_vec),
-  SketchedNT1_std = sort(df_diff_nt1$diff_std_vec),
-  SketchedNT2_std = sort(df_diff_nt2$diff_std_vec),
-  std_normal  = sort(std_normal)
+  SketchedNT2 = sort(df_diff_nt2$diff_vec)
 )
 
 ggplot(df_all, aes(x = SketchedNT2, y = SGD2)) +
