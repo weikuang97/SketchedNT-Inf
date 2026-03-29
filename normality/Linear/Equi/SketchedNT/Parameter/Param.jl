@@ -18,7 +18,7 @@ end
 
 # Equi-corr matrix
 D = 5
-RR = 0.1
+RR = 0.2
 Sigma = RR*ones(D,D)+(1-RR)*Matrix(1.0I,D,D)
 # Sigma = Matrix(1.0I,D,D)
 # Sigma = [RR^abs(i-j) for i=1:D, j=1:D]
