@@ -41,9 +41,8 @@ function StoNewton(c1,c2,c3,Max_Iter,ttau,nx,X_true,Sigma,Xistar,sigma)
         t = t + 1
     end
 
-    diff_std = sqrt(1/alpha_t) * sum(X_t-X_true) / sqrt(sum(Xistar))
     diff = sqrt(1/alpha_t) * sum(X_t-X_true)
 
     Time = time() - Time
-    return Time,diff_std,diff
+    return Time,diff
 end

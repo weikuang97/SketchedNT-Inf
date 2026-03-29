@@ -24,7 +24,7 @@ function StoNewtonMain(StoNewtonSet)
     # go over all repetitions
 	for IdRep = 1:Rep
 		println("Rep:", IdRep)
-		Time,diff_std,diff = StoNewton(c_1,c_2,c_3,Max_Iter,tau,nx,X_true,Sigma,Xistar,sigma)
+		Time,diff = StoNewton(c_1,c_2,c_3,Max_Iter,tau,nx,X_true,Sigma,Xistar,sigma)
         println("Time:", Time)
 
 		path1 = string("../Solution/tau",tau,"/rep",IdRep)
@@ -32,7 +32,7 @@ function StoNewtonMain(StoNewtonSet)
 			mkpath(path1)
 		end
 		pathcov = string(path1,"/Diff.csv")
-		df_diff = DataFrame(diff_std = diff_std, diff = diff)
+		df_diff = DataFrame(diff = diff)
 		CSV.write(pathcov, df_diff)
 	end
 end

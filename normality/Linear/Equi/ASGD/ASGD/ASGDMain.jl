@@ -19,7 +19,7 @@ function ASGDMain(ASGDSet)
 	# go over all repetitions
 	for IdRep = 1:Rep
 		println("Rep:", IdRep)
-		Time,diff_std,diff = ASGD(c_1,c_2,Max_Iter,nx,X_true,Sigma,Xistar,sigma)
+		Time,diff = ASGD(c_1,c_2,Max_Iter,nx,X_true,Sigma,Xistar,sigma)
         println("Time:", Time)
 
 		path1 = string("../Solution/rep",IdRep)
@@ -27,7 +27,7 @@ function ASGDMain(ASGDSet)
 			mkpath(path1)
 		end
 		pathcov = string(path1,"/Diff.csv")
-		df_diff = DataFrame(diff_std = diff_std, diff = diff)
+		df_diff = DataFrame(diff = diff)
 		CSV.write(pathcov, df_diff)
 	end
 end

@@ -3,7 +3,7 @@ library(ggmagnify)
 library(latex2exp)
 
 
-setwd("/.../normality/Linear/Toep")
+setwd("/.../normality/Linear/Equi")
 
 df_diff_asgd = read.csv("ASGD/Solution/Figures/Diff_mat.csv")
 df_diff_sgd1 = read.csv("SGD1/Solution/Figures/Diff_mat.csv")

@@ -1,6 +1,6 @@
-function ASGD(c1,c2,Max_Iter,nx,X_true,Sigma,Xistar,sigma)
+function SGD(c1,c2,Max_Iter,nx,X_true,Sigma,Xistar,sigma)
     ## Initialize variables
-    t,X_t,barx_t = 1,zeros(nx),zeros(nx),zeros(nx) # iterates
+    t,X_t = 1,zeros(nx),zeros(nx) # iterates
     beta_t = 0 # stepsize
 
 
@@ -14,14 +14,12 @@ function ASGD(c1,c2,Max_Iter,nx,X_true,Sigma,Xistar,sigma)
         # Step 2: update the iterate
         beta_t = c1/t^c2
         X_t = X_t - beta_t*barg_t
-        barx_t = ((t-1)/t)*barx_t + (1/t)*X_t
         t = t + 1
     end
 
-    diff_std = sqrt(t) * sum(barx_t-X_true) / sqrt(sum(Xistar))
-    diff = sqrt(t) * sum(barx_t-X_true)
+    diff = sqrt(1/beta_t) * sum(X_t-X_true)
 
     Time = time()-Time
 
-    return Time,diff_std,diff
+    return Time,diff
 end
